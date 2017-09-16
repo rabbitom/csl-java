@@ -10,6 +10,7 @@ public class CSLUtilityTest {
     @org.junit.Test
     public void toIntLE() throws Exception {
         assertEquals(0x030201, CSLUtility.toIntLE(new byte[]{1, 2, 3}, 0, 3));
+        assertEquals(197121, CSLUtility.toIntLE(new byte[]{1, 2, 3}, 0, 3));
         assertEquals(0x030201, CSLUtility.toIntLE(new byte[]{1, 2, 3}));
     }
 

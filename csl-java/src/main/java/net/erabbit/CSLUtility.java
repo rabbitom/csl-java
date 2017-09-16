@@ -169,7 +169,7 @@ public class CSLUtility {
             return new byte[0];
         }
         byte[] byteArray = null;
-        if (str.length() / 2 == 0) {
+        if (str.length() % 2 == 0) {
             byteArray = new byte[str.length() / 2];
             for (int i = 0; i < byteArray.length; i++) {
                 String subStr = str.substring(2 * i, 2 * i + 2);
@@ -178,7 +178,7 @@ public class CSLUtility {
         } else {
             byteArray = new byte[str.length() / 2 + 1];
             for (int i = 0; i < byteArray.length; i++) {
-                if (i < byteArray.length - 1) {
+                if (i < byteArray.length-1) {
                     String subStr = str.substring(2 * i, 2 * i + 2);
                     byteArray[i] = ((byte) Integer.parseInt(subStr, 16));
                 } else {

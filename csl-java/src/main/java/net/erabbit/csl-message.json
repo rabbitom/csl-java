@@ -1,0 +1,334 @@
+[
+  {
+    "id": "csl-data",
+    "name": "command",
+    "length": 1,
+    "type": "index",
+    "format": "int",
+    "value": [
+      {
+        "value": 0,
+        "id": "default-data"
+      },
+      {
+        "value": 1,
+        "id": "battery-data"
+      },
+      {
+        "value": 2,
+        "id": "item-name-data"
+      },
+      {
+        "value": 3,
+        "id": "user-name-data"
+      },
+      {
+        "value": 4,
+        "id": "config-data"
+      },
+      {
+        "value": 5,
+        "id": "cur-temperature-data"
+      },
+      {
+        "value": 6,
+        "id": "temperature-record-data"
+      },
+      {
+        "value": 7,
+        "id": "update-time-data"
+      }
+    ]
+  },
+  {
+    "id": "battery-get",
+    "name": "command",
+    "length": 1,
+    "type": "fixed",
+    "format": "int",
+    "value": [1],
+    "as-template": "command"
+  },
+  {
+    "id": "battery-data",
+    "length": 2,
+    "type": "combination",
+    "value": [
+      {
+        "template": "command",
+        "value": [1]
+      },
+      {
+        "name": "battery-level",
+        "length": 1,
+        "type": "variable",
+        "format": "int"
+      }
+    ]
+  },
+  {
+    "id": "item-name-set",
+    "length": 16,
+    "type": "combination",
+    "as-template": "item-name",
+    "value": [
+      {
+        "template": "command",
+        "value": [2]
+      },
+      {
+        "name": "name",
+        "type": "variable",
+        "length": 15,
+        "format": "string"
+      }
+    ]
+  },
+  {
+    "id": "item-name-get",
+    "template": "command",
+    "value": [2]
+  },
+  {
+    "id": "item-name-data",
+    "template": "item-name"
+  },
+
+  {
+    "id": "user-name-set",
+    "length": 16,
+    "type": "combination",
+    "as-template": "user-name",
+    "value": [
+      {
+        "template": "command",
+        "value": [3]
+      },
+      {
+        "name": "username",
+        "type": "variable",
+        "length": 15,
+        "format": "string"
+      }
+    ]
+  },
+  {
+    "id": "user-name-get",
+    "template": "command",
+    "value": [3]
+  },
+  {
+    "id": "user-name-data",
+    "template": "user-name"
+  },
+
+  {
+    "id": "config-set",
+    "length": 19,
+    "type": "combination",
+    "as-template": "config",
+    "value": [
+      {
+        "template": "command",
+        "value": [4]
+      },
+      {
+        "name": "production-date",
+        "id": "date",
+        "length": 3,
+        "type": "combination",
+        "as-template": "date",
+        "value": [
+          {
+            "name": "year",
+            "length": 1,
+            "type": "variable",
+            "format": "bcd",
+            "as-template": "date-field"
+          },
+          {
+            "name": "month",
+            "template": "date-field"
+          },
+          {
+            "name": "day",
+            "template": "date-field"
+          }
+        ]
+      },
+      {
+        "name": "expiry-date",
+        "template": "date"
+      },
+      {
+        "name": "start-time",
+        "type": "variable",
+        "length": 4,
+        "format": "int.le"
+      },
+      {
+        "name": "default-measure-interval",
+        "length": 1,
+        "type": "variable",
+        "format": "int"
+      },
+
+      {
+        "name": "cool-down-timers",
+        "type": "array",
+        "length": 6,
+        "value": [
+          {
+            "id": "cool-down-timer",
+            "length": 2,
+            "type": "combination",
+            "value": [
+              {
+                "name": "time",
+                "length": 1,
+                "type": "variable",
+                "format": "int"
+              },
+              {
+                "name": "interval",
+                "length": 1,
+                "type": "variable",
+                "format": "int"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "unit",
+        "type": "variable",
+        "format": "int",
+        "length": 1
+      }
+    ]
+  },
+  {
+    "id": "config-get",
+    "template": "command",
+    "value": [4]
+  },
+
+  {
+    "id": "config-data",
+    "template": "config"
+  },
+
+
+  {
+    "id": "cur-temperature-get",
+    "template": "command",
+    "value": [5]
+  },
+
+  {
+    "id": "cur-temperature-data",
+    "length": 2,
+    "type": "combination",
+    "value": [
+      {
+        "template": "command",
+        "value": [5]
+      },
+      {
+        "name": "cur-temperature",
+        "length": 1,
+        "type": "variable",
+        "format": "int"
+      }
+    ]
+  },
+
+  {
+    "id": "temperature-record-get",
+    "template": "command",
+    "value": [6]
+  },
+  {
+    "id": "temperature-record-data",
+    "length": 17,
+    "type": "combination",
+    "value": [
+      {
+        "template": "command",
+        "value": [6]
+      },
+      {
+        "name": "temperature-records",
+        "length": 16,
+        "type": "array",
+        "value": [
+          {
+            "id": "temperature-record",
+            "length": 4,
+            "type": "combination",
+            "value": [
+              {
+                "name": "time",
+                "type": "variable",
+                "format": "int.le",
+                "length": 3
+              },
+              {
+                "name": "temperature",
+                "type": "variable",
+                "format": "int",
+                "length": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    "id": "update-time-set",
+    "length": 5,
+    "type": "combination",
+    "as-template": "update-time",
+    "value": [
+      {
+        "template": "command",
+        "value": [7]
+      },
+      {
+        "name": "time",
+        "type": "variable",
+        "length": 4,
+        "format": "int.le"
+      }
+    ]
+  },
+
+  {
+    "id": "update-time-get",
+    "template": "command",
+    "value": [7]
+  },
+  {
+    "id": "update-time-data",
+    "template": "update-time"
+  },
+
+  {
+    "id": "clean-temperature-records",
+    "template": "command",
+    "value": [8]
+  },
+
+  {
+    "id": "reset-device",
+    "template": "command",
+    "value": [9]
+  },
+  {
+    "id": "default-data",
+    "template": "command",
+    "value": [0]
+  }
+]

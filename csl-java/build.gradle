@@ -2,8 +2,9 @@ apply plugin: 'java'
 apply plugin: 'maven'
 group = 'com.github.rabbitom'
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'junit:junit:4.12'
+    compile 'org.json:json:20170516'
 }
 
 sourceCompatibility = "1.7"

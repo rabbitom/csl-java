@@ -80,7 +80,7 @@ public class CSLMessage {
     }
 
     //编码
-    byte[] encode(JSONObject object, String fieldId) {
+    public byte[] encode(JSONObject object, String fieldId) {
         JSONObject field = defaultField;
         field = fields.get(fieldId);
         //LogUtil.d("csl", "fields.size=" + fields.size());
@@ -257,7 +257,7 @@ public class CSLMessage {
     }
 
 
-    JSONObject decode(byte[] buffer, int offset, int length, String fieldId) {
+    public JSONObject decode(byte[] buffer, int offset, int length, String fieldId) {
         JSONObject field = this.defaultField;
         if (fieldId != null)
             field = fields.get(fieldId);
